@@ -31,7 +31,7 @@ jobs:
         docker build -t aallvi/docker-graphql:1.0.1 .
     - name: Push Docker Image
       run: |
-        docker push -t aallvi/docker-graphql:1.0.1 .
+        docker push -t aallvi/docker-graphql:1.0.1 
       
         
     
