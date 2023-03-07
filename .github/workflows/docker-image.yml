@@ -46,7 +46,7 @@ jobs:
         docker build -t aallvi/docker-graphql:$NEW_VERSION .
         docker build -t aallvi/docker-graphql:latest .
     - name: Push Docker Image
-        env:
+      env:
         NEW_VERSION: ${{steps.version.outputs.version}}
       run: |
         docker push aallvi/docker-graphql:$NEW_VERSION
