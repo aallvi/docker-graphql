@@ -30,7 +30,7 @@ jobs:
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        NEW_VERSION: ${{steps.version.outputs.version}}
+        
       run: |
         echo "Iniciando login"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -39,14 +39,18 @@ jobs:
         
         
         
-#     - name: Build Docker Image
-#       run: |
-#         docker build -t aallvi/docker-graphql:1.0.1 .
-#         docker build -t aallvi/docker-graphql:latest .
-#     - name: Push Docker Image
-#       run: |
-#         docker push aallvi/docker-graphql:1.0.1 
-#         docker push aallvi/docker-graphql:latest
+    - name: Build Docker Image
+      env:
+        NEW_VERSION: ${{steps.version.outputs.version}}
+      run: |
+        docker build -t aallvi/docker-graphql:$NEW_VERSION .
+        docker build -t aallvi/docker-graphql:latest .
+    - name: Push Docker Image
+        env:
+        NEW_VERSION: ${{steps.version.outputs.version}}
+      run: |
+        docker push aallvi/docker-graphql:$NEW_VERSION
+        docker push aallvi/docker-graphql:latest
       
         
     
